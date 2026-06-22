@@ -3,23 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela empresa</title>
+    <title>Dashboard Empresa</title>
     <link rel="stylesheet" href="../public/CSS/empresaStyle.css">
 </head>
 <body>
 
-    <button id="abrirModal">Adicionar Informações</button>
+    <div id="avisoPulsante" class="aviso-banner">
+        ⚠️ Atenção: Por favor, adicione as informações da sua empresa para liberar o perfil completo.
+    </div>
 
-    <div class="modal-overlay" id="modalOverlay">
+    <main class="dashboard-container">
+        
+        <header class="dashboard-header">
+            <div>
+                <h1 id="nomeEmpresaTitulo">Minha Empresa</h1>
+                <p id="detalhesSubtitulo">Configure seu perfil e gerencie seus desafios</p>
+            </div>
+            <button id="abrirModal">Adicionar Informações</button>
+        </header>
 
-        <div class="modal">
-
-            <div class="modal-header">
-                Adicione mais informações
+        <section class="desafios-section">
+            <div class="desafios-header">
+                <h2>Aba: Desafios</h2>
+                <button id="abrirModalDesafio">+ Criar Desafio</button>
             </div>
 
-            <div class="modal-body">
+            <div class="abas-navegacao">
+                <button class="aba-btn ativa" onclick="alternarTabela('pendentes')">Desafios Pendentes</button>
+                <button class="aba-btn" onclick="alternarTabela('abertos')">Desafios Abertos</button>
+                <button class="aba-btn" onclick="alternarTabela('encerrados')">Desafios Encerrados</button>
+            </div>
+        </section>
+    </main>
 
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">Adicione mais informações</div>
+            <div class="modal-body">
                 <label>Nome fantasia:</label>
                 <input type="text" id="nomeFantasia">
 
@@ -41,9 +61,34 @@
                     <button id="salvar">Salvar</button>
                     <button id="fecharModal" class="btn-fechar">Fechar</button>
                 </div>
-
             </div>
+        </div>
+    </div>
 
+    <div class="modal-overlay" id="modalDesafioOverlay">
+        <div class="modal">
+            <div class="modal-header">Criar Desafio</div>
+            <div class="modal-body">
+                <label>Título:</label>
+                <input type="text" id="tituloDesafio">
+
+                <label>Descrição:</label>
+                <textarea id="descricaoDesafio"></textarea>
+
+                <label>Área:</label>
+                <input type="text" id="areaDesafio">
+
+                <label>Prazo:</label>
+                <input type="date" id="prazoDesafio">
+
+                <label>Recursos:</label>
+                <textarea id="recursosDesafio" placeholder="Ex: Softwares, links, infraestrutura..."></textarea>
+
+                <div class="botoes">
+                    <button id="salvarDesafio">Salvar Desafio</button>
+                    <button id="fecharModalDesafio" class="btn-fechar">Fechar</button>
+                </div>
+            </div>
         </div>
     </div>
 

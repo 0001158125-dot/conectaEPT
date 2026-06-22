@@ -6,41 +6,164 @@
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     background: #f4f6f9;
+    padding-bottom: 40px;
 }
 
-/* Fixa o botão exatamente no canto superior esquerdo com margem de respiro */
-#abrirModal {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    padding: 12px 24px;
+/* --- Banner de Aviso Pulsante --- */
+.aviso-banner {
+    width: 100%;
+    background-color: #fef08a; /* Amarelo suave */
+    color: #854d0e; /* Texto escuro harmônico */
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    animation: pulsarAviso 2.5s infinite ease-in-out;
+}
+
+@keyframes pulsarAviso {
+    0% { background-color: #fef08a; }
+    50% { background-color: #fde047; } /* Fica ligeiramente mais vivo no meio */
+    100% { background-color: #fef08a; }
+}
+
+/* --- Layout da Tela Principal --- */
+.dashboard-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.dashboard-header {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-header h1 {
+    font-size: 24px;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.dashboard-header p {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+/* --- Seção de Abas e Tabelas --- */
+.desafios-section {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.desafios-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.desafios-header h2 {
+    font-size: 18px;
+    color: #1e293b;
+}
+
+.abas-navegacao {
+    display: flex;
+    gap: 8px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.aba-btn {
+    background: none;
+    border: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.aba-btn:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+.aba-btn.ativa {
+    color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+/* --- Tabelas Customizadas --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    padding: 14px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+}
+
+tr:hover td {
+    background-color: #f8fafc;
+}
+
+/* --- Elementos Globais de Botões (Baseados nos Originais) --- */
+#abrirModal, #abrirModalDesafio, #salvar, #salvarDesafio {
+    background: #8b5cf6;
+    color: white;
     border: none;
     border-radius: 8px;
-    background: #8b5cf6; 
-    color: white;
     cursor: pointer;
-    font-size: 16px;
     font-weight: 600;
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
     transition: all 0.2s ease;
-    z-index: 10;
 }
 
-#abrirModal:hover {
-    background: #7c3aed; 
+#abrirModal, #abrirModalDesafio {
+    padding: 10px 20px;
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(139, 92, 246, 0.15);
+}
+
+#abrirModal:hover, #abrirModalDesafio:hover, #salvar:hover, #salvarDesafio:hover {
+    background: #7c3aed;
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
 }
 
-#abrirModal:active {
-    transform: translateY(0);
-}
-
+/* --- Modais (Mantidos e Otimizados) --- */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -52,31 +175,23 @@ body {
     z-index: 1000;
 }
 
-
-.modal-overlay.ativo {
-    display: flex;
-}
+.modal-overlay.ativo { display: flex; }
 
 .modal {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     background: #ffffff;
     border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow-y: auto;
+    max-height: 90vh;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     animation: aparecer .3s cubic-bezier(0.34, 1.56, 0.64, 1);
     margin: 20px;
 }
 
 @keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: scale(0.95) translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+    from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .modal-header {
@@ -84,103 +199,61 @@ body {
     color: white;
     text-align: center;
     padding: 20px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    letter-spacing: -0.5px;
 }
 
-.modal-body {
-    padding: 24px;
-}
+.modal-body { padding: 24px; }
 
 .modal-body label {
     display: block;
-    margin-top: 16px;
+    margin-top: 14px;
     margin-bottom: 6px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #334155;
 }
+.modal-body label:first-of-type { margin-top: 0; }
 
-.modal-body label:first-of-type {
-    margin-top: 0;
-}
-
-.modal-body input,
-.modal-body select,
-.modal-body textarea {
+.modal-body input, .modal-body select, .modal-body textarea {
     width: 100%;
     border: 1px solid #cbd5e1;
     border-radius: 8px;
-    padding: 12px;
-    font-size: 15px;
+    padding: 10px 12px;
+    font-size: 14px;
     color: #1e293b;
     background-color: #f8fafc;
     outline: none;
     transition: all 0.2s ease;
 }
 
-.modal-body input:focus,
-.modal-body select:focus,
-.modal-body textarea:focus {
-    border-color: #8b5cf6; 
+.modal-body input:focus, .modal-body select:focus, .modal-body textarea:focus {
+    border-color: #8b5cf6;
     background-color: #ffffff;
     box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
 }
 
-.modal-body input,
-.modal-body select {
-    height: 44px;
-}
-
-.modal-body textarea {
-    height: 100px;
-    resize: none;
-}
+.modal-body input, .modal-body select { height: 42px; }
+.modal-body textarea { height: 80px; resize: none; }
 
 .botoes {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    margin-top: 28px;
+    margin-top: 24px;
 }
 
-#salvar,
-.btn-fechar {
+#salvar, #salvarDesafio, .btn-fechar {
     flex: 1;
-    max-width: 140px;
-    height: 44px;
+    max-width: 130px;
+    height: 40px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     transition: all 0.2s ease;
 }
 
-#salvar {
-    background: #8b5cf6;
-    color: white;
-    box-shadow: 0 4px 10px rgba(139, 92, 246, 0.2);
-}
-
-.btn-fechar {
-    background: #e2e8f0;
-    color: #475569;
-}
-
-#salvar:hover {
-    background: #7c3aed;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(139, 92, 246, 0.3);
-}
-
-.btn-fechar:hover {
-    background: #cbd5e1;
-    color: #334155;
-}
-
-#salvar:active,
-.btn-fechar:active {
-    transform: translateY(0);
-}
+.btn-fechar { background: #e2e8f0; color: #475569; }
+.btn-fechar:hover { background: #cbd5e1; }
