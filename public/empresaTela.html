@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela empresa</title>
+    <link rel="stylesheet" href="../public/CSS/empresaStyle.css">
+</head>
+<body>
+
+    <button id="abrirModal">Adicionar Informações</button>
+
+    <div class="modal-overlay" id="modalOverlay">
+
+        <div class="modal">
+
+            <div class="modal-header">
+                Adicione mais informações
+            </div>
+
+            <div class="modal-body">
+
+                <label>Nome fantasia:</label>
+                <input type="text" id="nomeFantasia">
+
+                <label>CNPJ:</label>
+                <input type="text" id="cnpj">
+
+                <label>Setor:</label>
+                <select id="setor">
+                    <option value="">Selecione</option>
+                    <option>Aluno</option>
+                    <option>Docente</option>
+                    <option>Empresa</option>
+                </select>
+
+                <label>Descrição:</label>
+                <textarea id="descricao"></textarea>
+
+                <div class="botoes">
+                    <button id="salvar">Salvar</button>
+                    <button id="fecharModal" class="btn-fechar">Fechar</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../public/Script/empresaScript.js"></script>
+</body>
+</html>
